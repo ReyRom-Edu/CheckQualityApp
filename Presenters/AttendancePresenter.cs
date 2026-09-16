@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AttendancePC.Presenters
 {
-    class AttendancePresenter
+    class AttendancePresenter: IDisposable
     {
         private readonly IAttendanceView view;
         private readonly IAttendanceModel model;
@@ -23,6 +23,11 @@ namespace AttendancePC.Presenters
             model = new AttendanceModel();
             Global.DataChanged += Global_DataChanged;
         }
+        public void Dispose()
+        {
+            Global.DataChanged -= Global_DataChanged;
+        }
+
         private void Global_DataChanged()
         {
             LoadAttends(Global.CurrentDate);

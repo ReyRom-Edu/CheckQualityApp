@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AttendancePC.Presenters
 {
-    public class SchedulesPresenter : IPresenter
+    public class SchedulesPresenter : IPresenter, IDisposable
     {
         ISchedulesView view;
         ISchedulesModel model;
@@ -117,6 +117,11 @@ namespace AttendancePC.Presenters
             {
                 UserFeedback.ErrorMessage(ex);
             }
+        }
+
+        public void Dispose()
+        {
+            Global.DataChanged -= Global_DataChanged;
         }
     }
 }

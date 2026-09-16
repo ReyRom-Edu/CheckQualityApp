@@ -52,8 +52,13 @@ namespace AttendancePC.Views
         public ShedulesForm()
         {
             InitializeComponent();
-
+            FormClosed += ShedulesForm_FormClosed;
             presenter = new Presenters.SchedulesPresenter(this);
+        }
+
+        private void ShedulesForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            presenter.Dispose();
         }
 
         private void ShedulesForm_Load(object sender, EventArgs e)

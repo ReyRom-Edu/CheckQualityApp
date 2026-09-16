@@ -77,8 +77,13 @@ namespace AttendancePC.Views
             InitializeComponent();
             presenter = new AttendancePresenter(this);
             DataRenew += AttendanceForm_DataRenew;
-
+            FormClosed += AttendanceForm_FormClosed;
             StudentToolStripComboBox.ComboBox.DisplayMember = "Name";
+        }
+
+        private void AttendanceForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            presenter.Dispose();
         }
 
         private void AttendanceForm_DataRenew(object sender, EventArgs e)
@@ -89,6 +94,7 @@ namespace AttendancePC.Views
         private void AttendanceForm_Load(object sender, EventArgs e)
         {
             presenter.LoadStudents();
+            Date =  Global.CurrentDate;
             presenter.LoadAttends(Global.CurrentDate);
             EditToolStripButton.Visible = Global.CurrentUser.Editor != null;
         }
@@ -127,5 +133,7 @@ namespace AttendancePC.Views
         {
             presenter.LoadAttends(Global.CurrentDate);
         }
+
+        
     }
 }
