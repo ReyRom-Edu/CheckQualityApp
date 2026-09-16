@@ -48,14 +48,22 @@ namespace AttendancePC.Supporting
             }
         }
 
+        public static string ConnectionString
+        {
+            get
+            {
+                SqlConnectionStringBuilder sqlConnection = new SqlConnectionStringBuilder();
+                sqlConnection.DataSource = Server;
+                sqlConnection.InitialCatalog = Database;
+                sqlConnection.UserID = Login;
+                sqlConnection.Password = Password;
+                return sqlConnection.ConnectionString;
+            }
+        }
+
         public static void RenewConnectionString()
         {
-            SqlConnectionStringBuilder sqlConnection = new SqlConnectionStringBuilder();
-            sqlConnection.DataSource = Server;
-            sqlConnection.InitialCatalog = Database;
-            sqlConnection.UserID = Login;
-            sqlConnection.Password = Password;
-            Context.Database.Connection.ConnectionString = sqlConnection.ConnectionString;
+            Context.Database.Connection.ConnectionString = ConnectionString;
         }
         #endregion
     }

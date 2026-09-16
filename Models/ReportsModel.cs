@@ -17,7 +17,7 @@ namespace AttendancePC.Models
         {
             try
             {
-                var connection = new SqlConnection((new SqlConnectionStringBuilder() { DataSource = "ROMA1NV1CTUS", UserID = "sa", Password = "1", InitialCatalog = "Attendance" }).ToString());
+                var connection = new SqlConnection(Core.ConnectionString);
                 connection.Open();
                 SqlParameter startDateParameter = new SqlParameter("@startDate", $"{startDate:dd/MM/yyyy}");
                 SqlParameter endDateParameter = new SqlParameter("@endDate", $"{endDate:dd/MM/yyyy}");
